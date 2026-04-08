@@ -1,7 +1,7 @@
-export const LoginPage = () => {
+export const RegisterPage = () => {
   return (
     <main className="flex flex-col items-center justify-center">
-      <h1>Войти в систему</h1>
+      <h1>Регистрация в системе</h1>
     </main>
   );
 };

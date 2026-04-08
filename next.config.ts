@@ -6,7 +6,12 @@ const nextConfig: NextConfig = {
       {
         source: '/',
         destination: '/dashboard',
-        permanent: true, // Использовать 308 (постоянный) редирект
+        permanent: true,
+      },
+      {
+        source: '/auth',
+        destination: '/auth/login',
+        permanent: true,
       },
     ];
   },

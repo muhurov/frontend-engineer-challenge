@@ -1,7 +1,7 @@
-export const LoginPage = () => {
+export const ResetPasswordPage = () => {
   return (
     <main className="flex flex-col items-center justify-center">
-      <h1>Войти в систему</h1>
+      <h1>Задайте пароль</h1>
     </main>
   );
 };
