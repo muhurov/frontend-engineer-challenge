@@ -7,7 +7,7 @@ export const LoginPage = () => {
     <main className="flex flex-col gap-6 grow items-stretch justify-center px-[80px]">
       <Typography.Heading>Войти в систему</Typography.Heading>
       <LoginForm />
-      <Link href={ROUTE_PATH.FORGOT_PASSWORD} className="self-center">
+      <Link href={ROUTE_PATH.RECOVER_PASSWORD} className="self-center">
         Забыли пароль?
       </Link>
     </main>

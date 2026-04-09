@@ -8,7 +8,7 @@ export const RegisterPage = () => {
       <Typography.Heading>Регистрация в системе</Typography.Heading>
       <RegisterForm />
       <Typography.Paragraph className="text-center">
-        Зарегистрировавшись пользователь принимает условия{' '}
+        Зарегистрировавшись, пользователь принимает условия{' '}
         <Link className="text-[12px]/[1.4]" href={ROUTE_PATH.REGISTER} disabled>
           договора оферты
         </Link>{' '}

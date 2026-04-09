@@ -17,7 +17,7 @@ export const Link = ({
   return (
     <NextLink
       className={cn(
-        'text-primary text-sm font-medium transition-all',
+        'text-button-primary text-sm font-medium transition-all',
         disabled &&
           'pointer-events-none cursor-not-allowed underline font-[100] text-typography-tertiary',
         className,
