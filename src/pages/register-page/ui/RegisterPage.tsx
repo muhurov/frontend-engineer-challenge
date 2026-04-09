@@ -9,11 +9,11 @@ export const RegisterPage = () => {
       <RegisterForm />
       <Typography.Paragraph className="text-center">
         Зарегистрировавшись пользователь принимает условия{' '}
-        <Link href={ROUTE_PATH.REGISTER} disabled>
+        <Link className="text-[12px]/[1.4]" href={ROUTE_PATH.REGISTER} disabled>
           договора оферты
         </Link>{' '}
         и{' '}
-        <Link href={ROUTE_PATH.REGISTER} disabled>
+        <Link className="text-[12px]/[1.4]" href={ROUTE_PATH.REGISTER} disabled>
           политики конфиденциальности
         </Link>
       </Typography.Paragraph>

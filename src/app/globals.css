@@ -8,11 +8,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: #31a0f2;
   --color-logo-gray: #e4ebf3;
   --color-stroke-8: color-mix(in srgb, #1f1f27 8%, transparent);
-  --color-primary: #31a0f2;
-  --color-typography-tertiary: #c0c2cb;
+  --color-placeholder: color-mix(in srgb, #1f1f27 30%, transparent);
   --color-font-gray: color-mix(in srgb, #1f1f27 50%, transparent);
+  --color-typography-secondary: #81869a;
+  --color-typography-tertiary: #c0c2cb;
 
   --height-footer: 78px;
 

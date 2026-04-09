@@ -9,12 +9,13 @@ export type TypographyProps = {
 };
 
 export type TypographyParagraphProps = TypographyProps & {
-  variant?: 'normal';
-  size?: 'sm';
+  variant?: 'primary';
+  color?: 'primary' | 'secondary';
+  size?: 'sm' | 'md';
 };
 
 export type TypographyHeadingProps = TypographyProps & {
-  variant?: 'normal';
+  variant?: 'primary';
 };
 
 export const Typography = ({
@@ -26,7 +27,8 @@ export const Typography = ({
 };
 
 Typography.Paragraph = ({
-  variant = 'normal',
+  variant = 'primary',
+  color = 'primary',
   size = 'sm',
   className,
   ...other
@@ -34,9 +36,11 @@ Typography.Paragraph = ({
   return (
     <Typography
       className={cn(
-        'text-typography-tertiary',
-        variant === 'normal' && 'font-normal',
-        size === 'sm' && 'text-sm',
+        'text-sm',
+        variant === 'primary' && 'font-normal',
+        color === 'primary' && 'text-typography-tertiary',
+        color === 'secondary' && 'text-typography-secondary',
+        size === 'sm' && 'text-[12px]/[1.4]',
         className,
       )}
       {...other}
@@ -45,7 +49,7 @@ Typography.Paragraph = ({
 };
 
 Typography.Heading = ({
-  variant = 'normal',
+  variant = 'primary',
   className,
   ...other
 }: TypographyHeadingProps) => {
@@ -53,7 +57,7 @@ Typography.Heading = ({
     <Typography
       Component="h1"
       className={cn(
-        variant === 'normal' && 'text-[32px]/[1.2] font-medium',
+        variant === 'primary' && 'text-[32px]/[1.2] font-medium',
         className,
       )}
       {...other}

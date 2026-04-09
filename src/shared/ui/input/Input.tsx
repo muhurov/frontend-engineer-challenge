@@ -23,7 +23,7 @@ export const Input = ({ label, className, ...other }: InputProps) => {
       />
       <label
         htmlFor="email"
-        className="absolute left-0 top-5 origin-[0] -translate-y-6 scale-75 text-sm text-typography-tertiary duration-300 
+        className="absolute left-0 top-5 origin-[0] -translate-y-6 scale-75 text-[15px]/1.6 text-placeholder duration-300 pointer-events-none
                peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-[#31a0f2]"
       >
         {label}
