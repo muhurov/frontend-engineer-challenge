@@ -1,11 +1,22 @@
+'use client';
+
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import React from 'react';
+
+import { getAuthFooterTitle } from '@/entities/auth/lib';
+import { ROUTE_PATH } from '@/shared/config';
 
 export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
+  const hasFooter =
+    ROUTE_PATH.LOGIN === pathname || ROUTE_PATH.REGISTER === pathname;
+
   return (
     <main className="flex min-h-screen">
       <section className="flex flex-col w-7/18">
@@ -15,9 +26,13 @@ export default function AuthLayout({
         <section className="flex grow justify-center align-center">
           {children}
         </section>
-        <footer className="h-footer border-t-2 border-t-stroke-8"></footer>
+        {hasFooter && (
+          <footer className="flex justify-center items-center h-footer border-t-2 border-t-stroke-8">
+            {getAuthFooterTitle(pathname)}
+          </footer>
+        )}
       </section>
-      <aside className="flex items-center justify-center w-11/18 bg-logo-gray">
+      <aside className="flex items-center justify-center w-11/18 px-[80px] bg-logo-gray">
         <Image alt="logo" src="/logo.png" width={512} height={480} />
       </aside>
     </main>

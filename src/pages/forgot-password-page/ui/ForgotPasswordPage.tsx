@@ -1,7 +1,9 @@
+import { Typography } from '@/shared/ui';
+
 export const ForgotPasswordPage = () => {
   return (
     <main className="flex flex-col items-center justify-center">
-      <h1>Восстановление пароля</h1>
+      <Typography.Heading>Восстановление пароля</Typography.Heading>
     </main>
   );
 };

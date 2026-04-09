@@ -1,7 +1,22 @@
+import { RegisterForm } from '@/features/register-form';
+import { ROUTE_PATH } from '@/shared/config';
+import { Link, Typography } from '@/shared/ui';
+
 export const RegisterPage = () => {
   return (
-    <main className="flex flex-col items-center justify-center">
-      <h1>Регистрация в системе</h1>
+    <main className="flex flex-col gap-6 grow items-stretch justify-center px-[80px]">
+      <Typography.Heading>Регистрация в системе</Typography.Heading>
+      <RegisterForm />
+      <Typography.Paragraph className="text-center">
+        Зарегистрировавшись пользователь принимает условия{' '}
+        <Link href={ROUTE_PATH.REGISTER} disabled>
+          договора оферты
+        </Link>{' '}
+        и{' '}
+        <Link href={ROUTE_PATH.REGISTER} disabled>
+          политики конфиденциальности
+        </Link>
+      </Typography.Paragraph>
     </main>
   );
 };

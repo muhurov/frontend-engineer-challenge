@@ -1,7 +1,9 @@
+import { Typography } from '@/shared/ui';
+
 export const ResetPasswordPage = () => {
   return (
     <main className="flex flex-col items-center justify-center">
-      <h1>Задайте пароль</h1>
+      <Typography.Heading>Задайте пароль</Typography.Heading>
     </main>
   );
 };

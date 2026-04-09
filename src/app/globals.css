@@ -10,13 +10,13 @@
   --color-foreground: var(--foreground);
   --color-logo-gray: #e4ebf3;
   --color-stroke-8: color-mix(in srgb, #1f1f27 8%, transparent);
+  --color-primary: #31a0f2;
+  --color-typography-tertiary: #c0c2cb;
+  --color-font-gray: color-mix(in srgb, #1f1f27 50%, transparent);
 
   --height-footer: 78px;
 
   --font-sans: var(--font-inter);
-  --font-size-h1: 32px;
-  --line-height-h1: 1.2;
-  --font-weight-medium: 500;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,11 +34,5 @@ body {
 @layer base {
   body {
     font-family: var(--font-inter);
-  }
-
-  h1 {
-    font-size: var(--font-size-h1);
-    line-height: var(--line-height-h1);
-    font-weight: var(--font-weight-medium);
   }
 }
