@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { baseApi } from '@/shared/api/base';
+import { userApi } from '@/entities/user/api/userApi';
 
 export const createReduxStore = () => {
   return configureStore({
     reducer: {
-      [baseApi.reducerPath]: baseApi.reducer,
+      [userApi.reducerPath]: userApi.reducer,
     },
-    middleware: (getDefault) => getDefault().concat(baseApi.middleware),
+    middleware: (getDefault) => getDefault().concat(userApi.middleware),
   });
 };
 

@@ -10,6 +10,7 @@
   --color-foreground: var(--foreground);
   --color-button-primary: #31a0f2;
   --color-button-secondary: color-mix(in srgb, #31a0f0 10%, transparent);
+  --color-button-tertiary: transparent;
   --color-logo-gray: #e4ebf3;
   --color-stroke-8: color-mix(in srgb, #1f1f27 8%, transparent);
   --color-placeholder: color-mix(in srgb, #1f1f27 30%, transparent);

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
 
 import StoreProvider from '@/app/providers/StoreProvider';
 
@@ -24,7 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <StoreProvider>{children}</StoreProvider>
+        <StoreProvider>
+          {children}
+          <Toaster position="top-center" reverseOrder={false} />
+        </StoreProvider>
       </body>
     </html>
   );
