@@ -1,12 +1,9 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
 import { gql } from 'graphql-request';
 
-import { baseQuery } from '@/shared/api/base';
+import { baseApi } from '@/shared/api';
 import { transformGraphQLError } from '@/shared/lib';
 
-export const userApi = createApi({
-  reducerPath: 'userApi',
-  baseQuery,
+export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createUser: builder.mutation({
       query: ({ email, password }) => ({

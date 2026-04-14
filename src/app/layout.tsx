@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 
 import StoreProvider from '@/app/providers/StoreProvider';
+import StoreInitializer from '@/app/providers/StoreInitializer';
 
 import './globals.css';
 
@@ -26,8 +27,10 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <StoreProvider>
-          {children}
-          <Toaster position="top-center" reverseOrder={false} />
+          <StoreInitializer>
+            {children}
+            <Toaster position="top-center" reverseOrder={false} />
+          </StoreInitializer>
         </StoreProvider>
       </body>
     </html>

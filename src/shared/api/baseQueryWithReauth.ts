@@ -1,0 +1,92 @@
+import { BaseQueryFn } from '@reduxjs/toolkit/query';
+import { Mutex } from 'async-mutex';
+import { DocumentNode } from 'graphql';
+import { gql } from 'graphql-request';
+
+import {
+  clearSession,
+  setSession,
+} from '@/entities/session/model/sessionSlice';
+
+import { baseQuery } from './baseQuery';
+
+const mutex = new Mutex();
+
+export type GraphQLArgs = {
+  document: string | DocumentNode;
+  variables?: Record<string, any>;
+};
+
+export type GraphQLErrorResponse = {
+  message: string;
+  stack?: string;
+  name?: string;
+};
+
+export const baseQueryWithReauth: BaseQueryFn<
+  GraphQLArgs,
+  unknown,
+  GraphQLErrorResponse
+> = async (args, api, extraOptions) => {
+  await mutex.waitForUnlock();
+
+  try {
+    let result = await baseQuery(args, api, extraOptions);
+
+    const isUnauthorized = result.error?.message
+      ?.toLowerCase()
+      .includes('unauthorized');
+    console.log('bqwr', isUnauthorized);
+
+    if (isUnauthorized) {
+      console.log('bqwr isUnauthorized');
+      if (!mutex.isLocked()) {
+        const release = await mutex.acquire();
+
+        try {
+          console.log('bqwr isUnauthorized refresh query');
+          const refreshResult = await baseQuery(
+            {
+              document: gql`
+                mutation RefreshToken($refreshToken: String!) {
+                  refreshToken(refreshToken: $refreshToken) {
+                    accessToken
+                    refreshToken
+                  }
+                }
+              `,
+              variables: { refreshToken: localStorage.getItem('refreshToken') },
+            },
+            api,
+            extraOptions,
+          );
+
+          if (refreshResult.data) {
+            console.log('refresh successful', refreshResult);
+            api.dispatch(setSession((refreshResult.data as any).refreshToken));
+
+            result = await baseQuery(args, api, extraOptions);
+          } else {
+            console.log('refresh unsuccessful');
+            api.dispatch(clearSession());
+          }
+        } finally {
+          console.log('bqwr isUnauthorized finally');
+          release();
+        }
+      } else {
+        await mutex.waitForUnlock();
+
+        result = await baseQuery(args, api, extraOptions);
+      }
+    }
+    return result;
+  } catch (error: any) {
+    return {
+      error: {
+        status: 'FETCH_ERROR',
+        error: error.message,
+      },
+    };
+  }
+};
