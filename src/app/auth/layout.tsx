@@ -34,7 +34,7 @@ export default function AuthLayout({
             </footer>
           )}
         </section>
-        <aside className="flex items-center justify-center w-11/18 px-[80px] bg-logo-gray hidden md:block">
+        <aside className="flex items-center justify-center w-11/18 px-[80px] bg-logo-gray hidden md:flex">
           <Image alt="logo" src="/logo.png" width={512} height={480} />
         </aside>
       </main>
