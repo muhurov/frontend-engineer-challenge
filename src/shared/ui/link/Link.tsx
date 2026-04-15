@@ -1,6 +1,7 @@
-import { cn } from '@/shared/lib';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { ReactNode } from 'react';
+
+import { cn } from '@/shared/lib';
 
 export type LinkProps = {
   className?: string;

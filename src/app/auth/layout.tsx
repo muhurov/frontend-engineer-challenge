@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 
 import { getAuthFooterTitle } from '@/entities/auth/lib';
-import { ROUTE_PATH } from '@/shared/config';
 import { Guest } from '@/features/guest';
+import { ROUTE_PATH } from '@/shared/config';
 
 export default function AuthLayout({
   children,

@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { baseApi } from '@/shared/api';
 import { sessionSlice } from '@/entities/session';
+import { baseApi } from '@/shared/api';
 
 export const createReduxStore = () => {
   return configureStore({

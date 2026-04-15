@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
-import { ROUTE_PATH } from '@/shared/config/routes';
 import { clearSession, selectSession, useGetMeQuery } from '@/entities/session';
+import { ROUTE_PATH } from '@/shared/config/routes';
 import { Spinner, Typography } from '@/shared/ui';
 
 interface AuthProps {

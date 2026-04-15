@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 
-import StoreProvider from '@/app/providers/StoreProvider';
 import StoreInitializer from '@/app/providers/StoreInitializer';
+import StoreProvider from '@/app/providers/StoreProvider';
 
 import './globals.css';
 

@@ -1,18 +1,18 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 import { SESSION_API_CACHE_KEY } from '@/entities/session';
 import { useResetPasswordMutation } from '@/entities/user';
+import { GraphQLErrorResponse } from '@/shared/api';
+import { getValidationMessage } from '@/shared/lib';
 import { Button, InputController } from '@/shared/ui';
 
 import { DEFAULT_VALUES } from '../model/consts';
 import { resetPasswordSchema } from '../model/schema';
-import toast from 'react-hot-toast';
-import { useEffect } from 'react';
-import { GraphQLErrorResponse } from '@/shared/api';
-import { getValidationMessage } from '@/shared/lib';
 
 export type ResetPasswordFormProps = {
   email: string;
