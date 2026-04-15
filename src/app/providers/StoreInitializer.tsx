@@ -14,7 +14,6 @@ export default function StoreInitializer({
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log('initializer useeffect');
     dispatch(sessionSlice.actions.hydrateSession());
   }, [dispatch]);
 

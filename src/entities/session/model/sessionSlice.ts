@@ -55,7 +55,6 @@ export const sessionSlice = createSlice({
     hydrateSession: (state) => {
       const access = localStorage.getItem('accessToken');
       const refresh = localStorage.getItem('refreshToken');
-      console.log('hydrate session reducer', access, refresh);
 
       if (access) {
         state.accessToken = access;

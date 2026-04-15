@@ -21,8 +21,6 @@ export const Auth = ({ children }: AuthProps) => {
     skip: !isAuth || !isHydrated,
   });
 
-  console.log('error', error);
-
   useEffect(() => {
     if (!isHydrated) return;
 

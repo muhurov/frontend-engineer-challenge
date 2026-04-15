@@ -36,15 +36,12 @@ export const baseQueryWithReauth: BaseQueryFn<
     const isUnauthorized = result.error?.message
       ?.toLowerCase()
       .includes('unauthorized');
-    console.log('bqwr', isUnauthorized);
 
     if (isUnauthorized) {
-      console.log('bqwr isUnauthorized');
       if (!mutex.isLocked()) {
         const release = await mutex.acquire();
 
         try {
-          console.log('bqwr isUnauthorized refresh query');
           const refreshResult = await baseQuery(
             {
               document: gql`
@@ -62,16 +59,13 @@ export const baseQueryWithReauth: BaseQueryFn<
           );
 
           if (refreshResult.data) {
-            console.log('refresh successful', refreshResult);
             api.dispatch(setSession((refreshResult.data as any).refreshToken));
 
             result = await baseQuery(args, api, extraOptions);
           } else {
-            console.log('refresh unsuccessful');
             api.dispatch(clearSession());
           }
         } finally {
-          console.log('bqwr isUnauthorized finally');
           release();
         }
       } else {
