@@ -16,9 +16,9 @@ export default function DashboardPage() {
     try {
       logout({ refreshToken: localStorage.getItem('refreshToken') }).unwrap();
 
-      toast.success('Логаут прошел успешно', { duration: 2000 });
+      toast.success('Логаут прошел успешно');
     } catch (e) {
-      toast.error('Ошибка логаута', { duration: 2000 });
+      toast.error('Ошибка логаута');
     }
   };
 

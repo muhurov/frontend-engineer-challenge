@@ -30,11 +30,11 @@ export const LoginForm = () => {
     try {
       await login({ email, password }).unwrap();
 
-      toast.success('Логин прошел успешно', { duration: 2000 });
+      toast.success('Логин прошел успешно');
 
       router.push(ROUTE_PATH.DASHBOARD);
     } catch (e) {
-      toast.error('Ошибка логина', { duration: 2000 });
+      toast.error('Ошибка логина');
     }
   });
 

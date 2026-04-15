@@ -29,7 +29,11 @@ export default function RootLayout({
         <StoreProvider>
           <StoreInitializer>
             {children}
-            <Toaster position="top-center" reverseOrder={false} />
+            <Toaster
+              toastOptions={{ duration: 2000 }}
+              position="top-center"
+              reverseOrder={false}
+            />
           </StoreInitializer>
         </StoreProvider>
       </body>

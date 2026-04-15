@@ -34,9 +34,9 @@ export const ResetPasswordForm = ({ email, token }: ResetPasswordFormProps) => {
     try {
       await resetPassword({ password: data.password, email, token }).unwrap();
 
-      toast.success('Успешно', { duration: 2000 });
+      toast.success('Успешно');
     } catch (e) {
-      toast.error('Ошибка', { duration: 2000 });
+      toast.error('Ошибка');
     }
   });
 

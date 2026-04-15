@@ -32,11 +32,11 @@ export const RegisterForm = () => {
     try {
       await createUser({ email, password }).unwrap();
 
-      toast.success('Регистрация прошла успешно', { duration: 2000 });
+      toast.success('Регистрация прошла успешно');
 
       router.push(ROUTE_PATH.LOGIN);
     } catch (e) {
-      toast.error('Ошибка регистрации', { duration: 2000 });
+      toast.error('Ошибка регистрации');
     }
   });
 
