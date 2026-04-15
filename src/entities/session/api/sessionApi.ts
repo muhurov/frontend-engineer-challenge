@@ -39,8 +39,28 @@ export const sessionApi = baseApi.injectEndpoints({
           console.log('Login error in onQueryStarted:', error);
         }
       },
-
       transformErrorResponse: transformGraphQLError,
+    }),
+    logout: builder.mutation({
+      query: ({ refreshToken }) => ({
+        document: gql`
+          mutation Logout($refreshToken: String!) {
+            logout(refreshToken: $refreshToken)
+          }
+        `,
+        variables: { refreshToken },
+      }),
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+
+          if (data?.logout) {
+            dispatch(sessionSlice.actions.clearSession());
+          }
+        } catch (error) {
+          console.log('Logout error in onQueryStarted:', error);
+        }
+      },
     }),
     getMe: builder.query({
       query: () => ({
@@ -60,4 +80,5 @@ export const sessionApi = baseApi.injectEndpoints({
   overrideExisting: true,
 });
 
-export const { useLoginMutation, useGetMeQuery } = sessionApi;
+export const { useLoginMutation, useGetMeQuery, useLogoutMutation } =
+  sessionApi;
