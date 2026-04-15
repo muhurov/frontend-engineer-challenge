@@ -1,10 +1,67 @@
-import { Button, Input } from '@/shared/ui';
+'use client';
 
-export const ResetPasswordForm = () => {
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+
+import { SESSION_API_CACHE_KEY } from '@/entities/session';
+import { useResetPasswordMutation } from '@/entities/user';
+import { Button, InputController } from '@/shared/ui';
+
+import { DEFAULT_VALUES } from '../model/consts';
+import { resetPasswordSchema } from '../model/schema';
+import toast from 'react-hot-toast';
+import { useEffect } from 'react';
+import { GraphQLErrorResponse } from '@/shared/api';
+import { getValidationMessage } from '@/shared/lib';
+
+export type ResetPasswordFormProps = {
+  email: string;
+  token: string;
+};
+
+export const ResetPasswordForm = ({ email, token }: ResetPasswordFormProps) => {
+  const [resetPassword, { error }] = useResetPasswordMutation({
+    fixedCacheKey: SESSION_API_CACHE_KEY,
+  });
+
+  const { control, handleSubmit, setError } = useForm({
+    mode: 'onChange',
+    defaultValues: DEFAULT_VALUES,
+    resolver: zodResolver(resetPasswordSchema),
+  });
+
+  const handleResetPassword = handleSubmit(async (data) => {
+    try {
+      await resetPassword({ password: data.password, email, token }).unwrap();
+
+      toast.success('Успешно', { duration: 2000 });
+    } catch (e) {
+      toast.error('Ошибка', { duration: 2000 });
+    }
+  });
+
+  useEffect(() => {
+    const { message } = getValidationMessage(
+      (error as GraphQLErrorResponse)?.response?.errors?.[0]?.message,
+    );
+
+    setError('password', { message });
+  }, [error]);
+
   return (
-    <form className="flex flex-col gap-6">
-      <Input label="Введите пароль" />
-      <Input label="Повторите пароль" />
+    <form className="flex flex-col gap-6" onSubmit={handleResetPassword}>
+      <InputController
+        control={control}
+        name="password"
+        id="password"
+        label="Введите пароль"
+      />
+      <InputController
+        control={control}
+        name="repeatPassword"
+        id="repeatPassword"
+        label="Повторите пароль"
+      />
       <Button type="submit">Изменить пароль</Button>
     </form>
   );

@@ -20,7 +20,40 @@ export const userApi = baseApi.injectEndpoints({
       }),
       transformErrorResponse: transformGraphQLError,
     }),
+    recoverPassword: builder.mutation({
+      query: ({ email }) => ({
+        document: gql`
+          mutation RecoverPassword($email: String!) {
+            requestPasswordReset(email: $email) {
+              success
+              token
+            }
+          }
+        `,
+        variables: { email },
+      }),
+      transformErrorResponse: transformGraphQLError,
+    }),
+    resetPassword: builder.mutation({
+      query: ({ email, token, password }) => ({
+        document: gql`
+          mutation ResetPassword(
+            $email: String!
+            $token: String!
+            $password: String!
+          ) {
+            resetPassword(email: $email, token: $token, newPassword: $password)
+          }
+        `,
+        variables: { email, token, password },
+      }),
+      transformErrorResponse: transformGraphQLError,
+    }),
   }),
 });
 
-export const { useCreateUserMutation } = userApi;
+export const {
+  useCreateUserMutation,
+  useRecoverPasswordMutation,
+  useResetPasswordMutation,
+} = userApi;

@@ -15,7 +15,7 @@ export type TypographyParagraphProps = TypographyProps & {
 };
 
 export type TypographyHeadingProps = TypographyProps & {
-  variant?: 'primary';
+  variant?: 'primary' | 'secondary';
 };
 
 export const Typography = ({
@@ -58,6 +58,7 @@ Typography.Heading = ({
       Component="h1"
       className={cn(
         variant === 'primary' && 'text-[32px]/[1.2] font-medium',
+        variant === 'secondary' && 'text-[16px]/[1.2] font-medium',
         className,
       )}
       {...other}

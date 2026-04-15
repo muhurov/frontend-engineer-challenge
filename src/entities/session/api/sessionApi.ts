@@ -2,6 +2,7 @@ import { gql } from 'graphql-request';
 
 import { baseApi } from '@/shared/api';
 import { transformGraphQLError } from '@/shared/lib';
+
 import { sessionSlice } from '../model';
 
 export const sessionApi = baseApi.injectEndpoints({
@@ -35,9 +36,10 @@ export const sessionApi = baseApi.injectEndpoints({
             );
           }
         } catch (error) {
-          console.error('Login error in onQueryStarted:', error);
+          console.log('Login error in onQueryStarted:', error);
         }
       },
+
       transformErrorResponse: transformGraphQLError,
     }),
     getMe: builder.query({

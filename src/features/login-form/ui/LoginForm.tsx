@@ -16,7 +16,7 @@ import { loginSchema } from '../model/schema';
 export const LoginForm = () => {
   const router = useRouter();
 
-  const [login, { error }] = useLoginMutation({
+  const [login, { error, reset }] = useLoginMutation({
     fixedCacheKey: SESSION_API_CACHE_KEY,
   });
 
@@ -42,6 +42,7 @@ export const LoginForm = () => {
     if (error) setError('password', { message: 'Введены неверные данные' });
 
     return () => {
+      reset();
       clearErrors();
     };
   }, [error]);

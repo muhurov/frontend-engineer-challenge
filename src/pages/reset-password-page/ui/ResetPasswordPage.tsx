@@ -1,22 +1,59 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 
+import { SESSION_API_CACHE_KEY } from '@/entities/session';
+import { useResetPasswordMutation } from '@/entities/user';
 import { ResetPasswordForm } from '@/features/reset-password-form';
+import { GraphQLErrorResponse } from '@/shared/api';
 import { ROUTE_PATH } from '@/shared/config';
-import { Button, Typography } from '@/shared/ui';
+import { Button, Spinner, Typography } from '@/shared/ui';
+
+import { getIsValidationError } from '../lib';
 
 export const ResetPasswordPage = () => {
+  const searchParams = useSearchParams();
   const router = useRouter();
 
-  const isRestorationSuccess = false;
-  const isRestorationFailed = true;
+  const [, { isLoading, isSuccess, error, reset }] = useResetPasswordMutation({
+    fixedCacheKey: SESSION_API_CACHE_KEY,
+  });
+
+  const token = searchParams?.get('token');
+  const email = searchParams?.get('email');
+  const isLinkInvalid = !token || !email;
+  const isError = error && !getIsValidationError(error as GraphQLErrorResponse);
 
   const handleBack = () => {
     router.replace(ROUTE_PATH.LOGIN);
   };
 
-  if (isRestorationSuccess)
+  const handleRetry = () => {
+    reset();
+    router.refresh();
+  };
+
+  useEffect(
+    () => () => {
+      reset();
+    },
+    [],
+  );
+
+  if (isLinkInvalid)
+    return (
+      <main className="flex flex-col gap-6 grow items-stretch justify-center p-[80px]">
+        <Typography.Heading className="flex gap-2">
+          Ссылка для восстановления пароля не верна
+        </Typography.Heading>
+        <Button variant="secondary" onClick={handleBack}>
+          Назад в авторизацию
+        </Button>
+      </main>
+    );
+
+  if (isSuccess)
     return (
       <main className="flex flex-col gap-6 grow items-stretch justify-center p-[80px]">
         <Typography.Heading className="flex gap-2">
@@ -32,7 +69,7 @@ export const ResetPasswordPage = () => {
       </main>
     );
 
-  if (isRestorationFailed)
+  if (isError)
     return (
       <main className="flex flex-col gap-6 grow items-stretch justify-center p-[80px]">
         <Typography.Heading className="flex gap-2">
@@ -45,19 +82,22 @@ export const ResetPasswordPage = () => {
         <Button variant="secondary" onClick={handleBack}>
           Назад в авторизацию
         </Button>
-        <Button variant="tertiary">Попробовать заново</Button>
+        <Button variant="tertiary" onClick={handleRetry}>
+          Попробовать заново
+        </Button>
       </main>
     );
 
   return (
-    <main className="flex flex-col gap-6 grow items-stretch justify-center p-[80px]">
+    <main className="flex flex-col gap-6 grow items-stretch justify-center p-[80px] relative">
+      {isLoading && <Spinner />}
       <Typography.Heading className="flex gap-2">
         Задайте пароль
       </Typography.Heading>
       <Typography.Paragraph size="md">
         Напишите новый пароль, который будете использовать для входа
       </Typography.Paragraph>
-      <ResetPasswordForm />
+      <ResetPasswordForm token={token} email={email} />
     </main>
   );
 };

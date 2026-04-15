@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import { useCreateUserMutation } from '@/entities/user';
+import { useCreateUserMutation, USER_API_CACHE_KEY } from '@/entities/user';
 import { GraphQLErrorResponse } from '@/shared/api/types';
 import { ROUTE_PATH } from '@/shared/config';
 import { getValidationMessage } from '@/shared/lib';
@@ -18,7 +18,9 @@ import { registerSchema } from '../model/schema';
 export const RegisterForm = () => {
   const router = useRouter();
 
-  const [createUser, { error }] = useCreateUserMutation();
+  const [createUser, { error, reset }] = useCreateUserMutation({
+    fixedCacheKey: USER_API_CACHE_KEY,
+  });
 
   const { handleSubmit, control, setError, clearErrors } = useForm({
     mode: 'onChange',
@@ -40,12 +42,13 @@ export const RegisterForm = () => {
 
   useEffect(() => {
     const { field, message } = getValidationMessage(
-      (error as GraphQLErrorResponse)?.response?.errors?.[0].message,
+      (error as GraphQLErrorResponse)?.response?.errors?.[0]?.message,
     );
 
     if (field) setError(field as keyof typeof DEFAULT_VALUES, { message });
 
     return () => {
+      reset();
       clearErrors();
     };
   }, [error]);

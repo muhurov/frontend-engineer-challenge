@@ -1,10 +1,18 @@
+'use client';
+
+import { useCreateUserMutation, USER_API_CACHE_KEY } from '@/entities/user';
 import { RegisterForm } from '@/features/register-form';
 import { ROUTE_PATH } from '@/shared/config';
-import { Link, Typography } from '@/shared/ui';
+import { Link, Spinner, Typography } from '@/shared/ui';
 
 export const RegisterPage = () => {
+  const [, { isLoading }] = useCreateUserMutation({
+    fixedCacheKey: USER_API_CACHE_KEY,
+  });
+
   return (
-    <main className="flex flex-col gap-6 grow items-stretch justify-center px-[80px]">
+    <main className="flex flex-col gap-6 grow items-stretch justify-center px-[80px] relative">
+      {isLoading && <Spinner />}
       <Typography.Heading>Регистрация в системе</Typography.Heading>
       <RegisterForm />
       <Typography.Paragraph className="text-center">
