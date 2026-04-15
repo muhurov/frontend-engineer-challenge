@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 
 import { useAppSelector } from '@/app/store/hooks';
 import { sessionApi, useLogoutMutation } from '@/entities/session';
+import { getTokens } from '@/shared/lib';
 import { Button, Spinner, Typography } from '@/shared/ui';
 
 export default function DashboardPage() {
@@ -14,7 +15,7 @@ export default function DashboardPage() {
 
   const handleLogout = async () => {
     try {
-      logout({ refreshToken: localStorage.getItem('refreshToken') }).unwrap();
+      logout({ refreshToken: getTokens().refreshToken }).unwrap();
 
       toast.success('Логаут прошел успешно');
     } catch (e) {

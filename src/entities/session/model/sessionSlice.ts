@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 
 import { RootState } from '@/app/store/config';
+import { getTokens, removeTokens, setTokens } from '@/shared/lib';
 
 export type SessionUser = {
   id: string;
@@ -31,8 +32,7 @@ const applySession = (state: SessionState, payload: SessionPayload) => {
   state.accessToken = payload.accessToken;
   state.refreshToken = payload.refreshToken;
 
-  localStorage.setItem('accessToken', payload.accessToken);
-  localStorage.setItem('refreshToken', payload.refreshToken);
+  setTokens({ access: payload.accessToken, refresh: payload.refreshToken });
 
   Cookies.set('accessToken', payload.accessToken, { expires: 7 });
 };
@@ -49,16 +49,14 @@ export const sessionSlice = createSlice({
       state.accessToken = undefined;
       state.refreshToken = undefined;
 
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
+      removeTokens();
     },
     hydrateSession: (state) => {
-      const access = localStorage.getItem('accessToken');
-      const refresh = localStorage.getItem('refreshToken');
+      const { accessToken, refreshToken } = getTokens();
 
-      if (access) {
-        state.accessToken = access;
-        state.refreshToken = refresh ?? undefined;
+      if (accessToken) {
+        state.accessToken = accessToken;
+        state.refreshToken = refreshToken ?? undefined;
         state.isAuth = true;
       }
 

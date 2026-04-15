@@ -10,6 +10,8 @@ import {
 
 import { baseQuery } from './baseQuery';
 
+import { getTokens } from '../lib';
+
 const mutex = new Mutex();
 
 export type GraphQLArgs = {
@@ -56,7 +58,7 @@ export const baseQueryWithReauth: BaseQueryFn<
                   }
                 }
               `,
-              variables: { refreshToken: localStorage.getItem('refreshToken') },
+              variables: { refreshToken: getTokens().refreshToken },
             },
             api,
             extraOptions,
