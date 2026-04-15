@@ -11,7 +11,7 @@ export default function LoginPage() {
   });
 
   return (
-    <main className="flex flex-col gap-6 grow items-stretch justify-center px-[80px] relative">
+    <main className="flex flex-col gap-6 grow items-stretch justify-center p-[24px] md:px-[80px] relative">
       {isLoading && <Spinner />}
       <Typography.Heading>Войти в систему</Typography.Heading>
       <LoginForm />

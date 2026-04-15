@@ -44,7 +44,7 @@ export default function ResetPasswordPage() {
 
   if (isLinkInvalid)
     return (
-      <main className="flex flex-col gap-6 grow items-stretch justify-center p-[80px]">
+      <main className="flex flex-col gap-6 grow items-stretch justify-center p-[24px] md:p-[80px]">
         <Typography.Heading className="flex gap-2">
           Ссылка для восстановления пароля не верна
         </Typography.Heading>
@@ -56,7 +56,7 @@ export default function ResetPasswordPage() {
 
   if (isSuccess)
     return (
-      <main className="flex flex-col gap-6 grow items-stretch justify-center p-[80px]">
+      <main className="flex flex-col gap-6 grow items-stretch justify-center p-[24px] md:p-[80px]">
         <Typography.Heading className="flex gap-2">
           Пароль был восстановлен
         </Typography.Heading>
@@ -72,7 +72,7 @@ export default function ResetPasswordPage() {
 
   if (isError)
     return (
-      <main className="flex flex-col gap-6 grow items-stretch justify-center p-[80px]">
+      <main className="flex flex-col gap-6 grow items-stretch justify-center p-[24px] md:p-[80px]">
         <Typography.Heading className="flex gap-2">
           Пароль не был восстановлен
         </Typography.Heading>
@@ -90,7 +90,7 @@ export default function ResetPasswordPage() {
     );
 
   return (
-    <main className="flex flex-col gap-6 grow items-stretch justify-center p-[80px] relative">
+    <main className="flex flex-col gap-6 grow items-stretch justify-center p-[24px] md:p-[80px] relative">
       {isLoading && <Spinner />}
       <Typography.Heading className="flex gap-2">
         Задайте пароль

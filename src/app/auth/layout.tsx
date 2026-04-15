@@ -21,8 +21,8 @@ export default function AuthLayout({
   return (
     <Guest>
       <main className="flex min-h-screen">
-        <section className="flex flex-col w-7/18">
-          <header className="pl-5 pt-4">
+        <section className="flex flex-col w-full md:w-7/18">
+          <header className="pl-5 md:pl-1 pt-4">
             <Image alt="brand" src="/brand.png" width={200} height={40} />
           </header>
           <section className="flex grow justify-center align-center">
@@ -34,7 +34,7 @@ export default function AuthLayout({
             </footer>
           )}
         </section>
-        <aside className="flex items-center justify-center w-11/18 px-[80px] bg-logo-gray">
+        <aside className="flex items-center justify-center w-11/18 px-[80px] bg-logo-gray hidden md:block">
           <Image alt="logo" src="/logo.png" width={512} height={480} />
         </aside>
       </main>

@@ -42,7 +42,7 @@ export default function RecoverPasswordPage() {
 
   if (isSuccess)
     return (
-      <main className="flex flex-col gap-6 grow items-stretch justify-center p-[80px]">
+      <main className="flex flex-col gap-6 grow items-stretch justify-center p-[24px] md:p-[80px]">
         <Typography.Heading className="flex gap-2">
           Проверьте свою почту
         </Typography.Heading>
@@ -58,7 +58,7 @@ export default function RecoverPasswordPage() {
     );
 
   return (
-    <main className="flex flex-col gap-6 grow items-stretch justify-center p-[80px] relative">
+    <main className="flex flex-col gap-6 grow items-stretch justify-center p-[24px] md:p-[80px] relative">
       {isLoading && <Spinner />}
       <Typography.Heading className="flex gap-2">
         <IconButton icon={ArrowLeft} onClick={handleBack} /> Восстановление
