@@ -13,5 +13,5 @@ export const getValidationMessage = (message?: string) => {
     };
   }
 
-  return { field: 'root', message: message };
+  return { field: undefined, message: message };
 };

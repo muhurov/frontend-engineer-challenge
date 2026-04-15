@@ -42,10 +42,16 @@ export const LoginForm = () => {
     if (error) setError('password', { message: 'Введены неверные данные' });
 
     return () => {
-      reset();
       clearErrors();
     };
   }, [error]);
+
+  useEffect(
+    () => () => {
+      reset();
+    },
+    [],
+  );
 
   return (
     <form className="flex flex-col gap-6" onSubmit={handleLogin}>

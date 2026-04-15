@@ -45,13 +45,19 @@ export const RegisterForm = () => {
       (error as GraphQLErrorResponse)?.response?.errors?.[0]?.message,
     );
 
-    if (field) setError(field as keyof typeof DEFAULT_VALUES, { message });
+    setError((field as keyof typeof DEFAULT_VALUES) ?? 'email', { message });
 
     return () => {
-      reset();
       clearErrors();
     };
   }, [error]);
+
+  useEffect(
+    () => () => {
+      reset();
+    },
+    [],
+  );
 
   return (
     <form className="flex flex-col gap-6" onSubmit={handleCreateUser}>
