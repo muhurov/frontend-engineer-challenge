@@ -5,14 +5,15 @@ import { useEffect } from 'react';
 
 import { SESSION_API_CACHE_KEY } from '@/entities/session';
 import { useResetPasswordMutation } from '@/entities/user';
-import { ResetPasswordForm } from '@/features/reset-password-form';
+import {
+  ResetPasswordForm,
+  getIsValidationError,
+} from '@/features/reset-password-form';
 import { GraphQLErrorResponse } from '@/shared/api';
 import { ROUTE_PATH } from '@/shared/config';
 import { Button, Spinner, Typography } from '@/shared/ui';
 
-import { getIsValidationError } from '../lib';
-
-export const ResetPasswordPage = () => {
+export default function ResetPasswordPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -100,4 +101,4 @@ export const ResetPasswordPage = () => {
       <ResetPasswordForm token={token} email={email} />
     </main>
   );
-};
+}

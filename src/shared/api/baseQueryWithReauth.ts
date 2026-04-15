@@ -80,6 +80,7 @@ export const baseQueryWithReauth: BaseQueryFn<
       error: {
         status: 'FETCH_ERROR',
         error: error.message,
+        message: error.message,
       },
     };
   }

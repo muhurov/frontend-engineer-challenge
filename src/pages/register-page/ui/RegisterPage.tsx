@@ -5,7 +5,7 @@ import { RegisterForm } from '@/features/register-form';
 import { ROUTE_PATH } from '@/shared/config';
 import { Link, Spinner, Typography } from '@/shared/ui';
 
-export const RegisterPage = () => {
+export default function RegisterPage() {
   const [, { isLoading }] = useCreateUserMutation({
     fixedCacheKey: USER_API_CACHE_KEY,
   });
@@ -27,4 +27,4 @@ export const RegisterPage = () => {
       </Typography.Paragraph>
     </main>
   );
-};
+}

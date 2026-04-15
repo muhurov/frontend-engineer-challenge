@@ -13,7 +13,7 @@ import { ArrowLeft } from '@/shared/assets/icons';
 import { ROUTE_PATH } from '@/shared/config';
 import { Button, IconButton, Spinner, Typography } from '@/shared/ui';
 
-export const RecoverPasswordPage = () => {
+export default function RecoverPasswordPage() {
   const router = useRouter();
 
   const [recoverData, setRecoverData] = useState<OnSuccessProps>();
@@ -70,4 +70,4 @@ export const RecoverPasswordPage = () => {
       <RecoverPasswordForm onSuccess={handleSuccess} />
     </main>
   );
-};
+}

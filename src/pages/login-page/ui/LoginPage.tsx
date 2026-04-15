@@ -5,7 +5,7 @@ import { LoginForm } from '@/features/login-form';
 import { ROUTE_PATH } from '@/shared/config';
 import { Link, Spinner, Typography } from '@/shared/ui';
 
-export const LoginPage = () => {
+export default function LoginPage() {
   const [, { isLoading }] = useLoginMutation({
     fixedCacheKey: SESSION_API_CACHE_KEY,
   });
@@ -20,4 +20,4 @@ export const LoginPage = () => {
       </Link>
     </main>
   );
-};
+}

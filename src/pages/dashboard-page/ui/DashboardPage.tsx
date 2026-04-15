@@ -6,7 +6,7 @@ import { useAppSelector } from '@/app/store/hooks';
 import { sessionApi, useLogoutMutation } from '@/entities/session';
 import { Button, Spinner, Typography } from '@/shared/ui';
 
-export const DashboardPage = () => {
+export default function DashboardPage() {
   const [logout, { isLoading }] = useLogoutMutation();
   const {
     data: { me },
@@ -37,4 +37,4 @@ export const DashboardPage = () => {
       <Button onClick={handleLogout}>Logout</Button>
     </main>
   );
-};
+}
