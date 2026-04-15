@@ -17,16 +17,20 @@ export type GraphQLArgs = {
   variables?: Record<string, any>;
 };
 
-export type GraphQLErrorResponse = {
+export type GraphQLError = {
   message: string;
   stack?: string;
   name?: string;
 };
 
+export const enum ErrorStatus {
+  FetchError = 'FETCH_ERROR',
+}
+
 export const baseQueryWithReauth: BaseQueryFn<
   GraphQLArgs,
   unknown,
-  GraphQLErrorResponse
+  GraphQLError
 > = async (args, api, extraOptions) => {
   await mutex.waitForUnlock();
 
@@ -78,7 +82,7 @@ export const baseQueryWithReauth: BaseQueryFn<
   } catch (error: any) {
     return {
       error: {
-        status: 'FETCH_ERROR',
+        status: ErrorStatus.FetchError,
         error: error.message,
         message: error.message,
       },

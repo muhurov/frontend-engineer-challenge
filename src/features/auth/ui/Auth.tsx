@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { clearSession, selectSession, useGetMeQuery } from '@/entities/session';
+import { ErrorStatus } from '@/shared/api';
 import { ROUTE_PATH } from '@/shared/config/routes';
 import { Spinner, Typography } from '@/shared/ui';
 
@@ -51,7 +52,7 @@ export const Auth = ({ children }: AuthProps) => {
     );
   }
 
-  if ((error as any)?.status === 'FETCH_ERROR')
+  if ((error as any)?.status === ErrorStatus.FetchError)
     return (
       <div className="flex h-dvh w-full items-center justify-center">
         <Typography.Heading>
